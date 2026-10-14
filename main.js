@@ -79,6 +79,7 @@ function buscar() {
     || comida.provincia.toLowerCase().includes(busqueda.value.toLowerCase()) 
     || comida.categoria.toLowerCase().includes(busqueda.value.toLowerCase()) 
   })
+  console.log(comidasFiltradas)
   mostrarComidas(comidasFiltradas)
 
 
