@@ -5,6 +5,7 @@ fetch('./data/comidas-extended.json')
   console.log(data);
   comidas = data;
   mostrarComida()
+  actualizarfiltros()
 })
 .catch(error => {
   console.error('Error al leer el archivo JSON:', error);
@@ -42,18 +43,27 @@ agregarComida.addEventListener("submit", (event) => {
 event.preventDefault()
 alert("Comida agregada: " + event.target.nombre.value)
 
+const ingredientesInputs = document.querySelectorAll(".ingrediente");
+let ingredientes = []
+
+ingredientesInput.forEach(input => {
+  ingredientes.push(input.value)
+})
 
 let nuevaComida = {
   nombre: event.target.nombre.value,
   provincia: event.target.provincia.value,
   categoria: event.target.categoria.value,
-  ingredientes: event.target.ingredientes.value.split(",")
+  ingredientes: ingredientes
 }
 
 
 console.log(nuevaComida)
 comidas.push(nuevaComida)
 mostrarComida()
+
+ingredientesConteiner.innerHTML =
+  '<input type="text" class="ingrediente" placeholder="Ingrediente" required>'
 event.target.reset()
 
 
@@ -88,3 +98,28 @@ function buscar() {
 filtroCategoria.addEventListener("change", filtrar)
 filtroProvincia.addEventListener("change", filtrar)
 busqueda.addEventListener("input", buscar)
+
+function actualizarfiltros() {
+  let categoria = []
+
+  comidas.forEach(comida => {
+    if(categoria.includes(comida.categoria) ){}
+    categorias.push(comida.categoria)
+  }
+  )}
+categoria.forEach(categoria =>{
+  filtroCategoria.innerHTML += '<option value="${categoria}">${categoria}</option>'
+
+})
+
+
+
+//esto iba en otro lado
+const agregarIngredienteBtn = document.getElementById("agregarIngrediente")
+const ingredientesConteiner = document.querySelector(".contenedor-ingredientes")
+
+agregarIngredienteBtn.addEventListener("click", () => {
+agregarIngredienteBtn.innerHTML +=
+  '<input type="text" class="ingrediente" placeholder="Ingrediente">'
+})
+
